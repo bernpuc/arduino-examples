@@ -6,6 +6,7 @@
  * Testing the HC-SR04 ultrasonic proximity sensor
  * https://docs.google.com/document/d/1Y-yZnNhMYy7rwhAgyL_pfa39RsB-x2qR4vP8saG73rE/edit
  */
+#include <hcsr04.h>
 
 #define ECHO_SIG 7
 #define TRIGGER 6
@@ -20,30 +21,20 @@ unsigned long pulsewidth;
 
 float range;
 
+//Initialize the range sensor
+hcsr04 range_sensor(TRIGGER, ECHO_SIG);
+
 void setup() {
   // put your setup code here, to run once:
-  pinMode(TRIGGER, OUTPUT);
-  pinMode(ECHO_SIG, INPUT);
-
-  digitalWrite(TRIGGER, LOW);
   if (DEBUG == 1) Serial.begin(57600);
 }
 
 void loop() {
   // Mark a timer to start loop
   start_time = millis();
-  
-  // Send trigger signal (10uS pulse)
-  digitalWrite(TRIGGER, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIGGER, LOW);
 
-  // Wait for echo pulse HIGH; default is to wait upto 1 second
-  // If we measure the length of the echo pulse, we can calculate range
-  // units = milliseconds
-  pulsewidth = pulseIn(ECHO_SIG, HIGH);
-  // Formula from http://www.instructables.com/id/Simple-Arduino-and-HC-SR04-Example/step3/Upload-the-sketch/
-  range = (pulsewidth/2) / 29.1;
+  // query proximity sensor for current range
+  range = range_sensor.getrange();
 
   // Mark a time to stop loop
   end_time = millis();
