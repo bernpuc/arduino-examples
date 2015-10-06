@@ -64,10 +64,10 @@ void loop() {
   }
   
   if (DEBUG == 1) {
-    Serial.print(millis()/1000);
+    Serial.print(millis()/1000);  //System run time in seconds
     Serial.print(" msec = ");
-    Serial.print(end_time-start_time);
-    Serial.print(" range = ");
+    Serial.print(end_time-start_time);  //Loop time in milliseconds
+    Serial.print(" range = ");          //Distance in centimeters
     Serial.print(range);
     Serial.println("");
   }
