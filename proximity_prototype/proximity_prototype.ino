@@ -8,11 +8,13 @@
  */
 #include <hcsr04.h>
 
-#define ECHO_SIG 7
-#define TRIGGER 6
-#define LED_RED 5
-#define LED_YELLOW 4
-#define LED_GREEN 3
+//Digital IO channels
+#define ECHO_SIG    7
+#define TRIGGER     6
+#define LED_RED     5
+#define LED_YELLOW  4
+#define LED_GREEN   3
+
 #define DEBUG 1
 
 unsigned long end_time;
@@ -32,12 +34,9 @@ void setup() {
 void loop() {
   // Mark a timer to start loop
   start_time = millis();
-
+  
   // query proximity sensor for current range
   range = range_sensor.getrange();
-
-  // Mark a time to stop loop
-  end_time = millis();
 
   // LED OUTPUT
   if (range < 50){
@@ -54,8 +53,11 @@ void loop() {
     digitalWrite(LED_GREEN, HIGH);
   }
   
+  // Mark a time to stop loop
+  end_time = millis();
+  
   if (DEBUG == 1) {
-    Serial.print(millis()/1000);  //System run time in seconds
+    Serial.print(float(millis()/1000.0));  //System run time in seconds
     Serial.print(" msec = ");
     Serial.print(end_time-start_time);  //Loop time in milliseconds
     Serial.print(" range = ");          //Distance in centimeters
