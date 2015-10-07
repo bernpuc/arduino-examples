@@ -15,15 +15,16 @@ hcsr04::hcsr04(int chan_trig, int chan_signal)
     // setup IO
 	pinMode(TRIGGER, OUTPUT);
 	pinMode(ECHO_SIG, INPUT);
+	digitalWrite(TRIGGER, LOW);
 }
 
 //Public Methods
 float hcsr04::getrange(void){
 	// Formula from http://www.instructables.com/id/Simple-Arduino-and-HC-SR04-Example/step3/Upload-the-sketch/
     
-    send_trigger();
-    pulsewidth = pulseIn(ECHO_SIG, HIGH);
-    range = (pulsewidth/2) / 29.1;
+	send_trigger();
+	pulsewidth = pulseIn(ECHO_SIG, HIGH);
+	range = (pulsewidth/2) / 29.1;
 
 	return range;
 }
