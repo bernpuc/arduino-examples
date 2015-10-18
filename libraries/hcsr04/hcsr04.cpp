@@ -19,20 +19,24 @@ hcsr04::hcsr04(int chan_trig, int chan_signal)
 }
 
 //Public Methods
+
+// Return range in centimeters
+// Formula from http://www.instructables.com/id/Simple-Arduino-and-HC-SR04-Example/step3/Upload-the-sketch/
 float hcsr04::getrange(void){
-	// Formula from http://www.instructables.com/id/Simple-Arduino-and-HC-SR04-Example/step3/Upload-the-sketch/
     
 	send_trigger();
 	pulsewidth = pulseIn(ECHO_SIG, HIGH);
 	range = (pulsewidth/2) / 29.1;
-
 	return range;
 }
 
 //Private Methods
+
+// Send trigger signal (10 usec pulse)
 void hcsr04::send_trigger(void){
 
-	// Send trigger signal (10 usec pulse)
+    digitalWrite(TRIGGER, LOW);
+    delayMicroseconds(1);
     digitalWrite(TRIGGER, HIGH);
     delayMicroseconds(10);
     digitalWrite(TRIGGER, LOW);
