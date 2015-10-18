@@ -36,8 +36,8 @@
  */
 unsigned long end_time;
 unsigned long start_time;
-int loop_time;
-unsigned int time_now;
+unsigned long time_now;
+unsigned int loop_time;
 unsigned int days;
 unsigned int hours;
 unsigned int minutes;
