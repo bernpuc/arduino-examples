@@ -12,8 +12,8 @@
 class hcsr04
 {
 	public:
-    	hcsr04(int, int);
-    	float getrange(void);
+		hcsr04(int, int);
+		float getrange(void);
         
     private:
     	int TRIGGER;

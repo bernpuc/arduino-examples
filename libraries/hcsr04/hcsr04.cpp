@@ -1,5 +1,5 @@
 /*
-	hcsr04.h - Library for controlling ultrasonice proximity sensor HC-SR04 - implementation
+    hcsr04.h - Library for controlling ultrasonice proximity sensor HC-SR04 - implementation
 */
 
 // include this library's description file
@@ -8,14 +8,14 @@
 //Constructor
 hcsr04::hcsr04(int chan_trig, int chan_signal)
 {
-	// initialize this instance's values
+    // initialize this instance's values
     TRIGGER = chan_trig;
     ECHO_SIG = chan_signal;
     
     // setup IO
-	pinMode(TRIGGER, OUTPUT);
-	pinMode(ECHO_SIG, INPUT);
-	digitalWrite(TRIGGER, LOW);
+    pinMode(TRIGGER, OUTPUT);
+    pinMode(ECHO_SIG, INPUT);
+    digitalWrite(TRIGGER, LOW);
 }
 
 //Public Methods
@@ -24,10 +24,10 @@ hcsr04::hcsr04(int chan_trig, int chan_signal)
 // Formula from http://www.instructables.com/id/Simple-Arduino-and-HC-SR04-Example/step3/Upload-the-sketch/
 float hcsr04::getrange(void){
     
-	send_trigger();
-	pulsewidth = pulseIn(ECHO_SIG, HIGH);
-	range = (pulsewidth/2) / 29.1;
-	return range;
+    send_trigger();
+    pulsewidth = pulseIn(ECHO_SIG, HIGH);
+    range = (pulsewidth/2) / 29.1;
+    return range;
 }
 
 //Private Methods
